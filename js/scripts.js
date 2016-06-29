@@ -1,6 +1,7 @@
 
-var x = Math.floor((Math.random() *6) + 1);
-var y = Math.floor((Math.random() *6) + 1);
+
+var x;
+var y;
 
 //business logic
 function Game(player1, player2) {
@@ -10,13 +11,15 @@ function Game(player1, player2) {
   this.player2Total = player2;
 }
 
-Game.prototype.rollDie1 = function(x) {
+Game.prototype.rollDie1 = function() {
+  x = Math.floor((Math.random() *6) + 1);
   this.player1Total += x;
 
   console.log(x);
 }
 
-Game.prototype.rollDie2 = function(y) {
+Game.prototype.rollDie2 = function() {
+  y = Math.floor((Math.random() *6) + 1);
   this.player2Total += y;
 
   console.log(y);
@@ -32,15 +35,15 @@ $(document).ready(function() {
   $("#game1").submit(function(event) {
     event.preventDefault();
 
-    gameResult.rollDie1(x);
-    $("#result").text(gameResult.player1Total);
+    gameResult.rollDie1();
+    $("#result1").text("Player 1 results:" +""+ gameResult.player1Total);
   });
 
   $("#game2").submit(function(event){
     event.preventDefault();
 
-    gameResult.rollDie2(y);
-    $("#result").text(gameResult.player2Total);
+    gameResult.rollDie2();
+    $("#result2").text("Player 2 results:" +""+gameResult.player2Total);
   });
 
   $("#result").show();
