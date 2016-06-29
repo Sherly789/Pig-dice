@@ -2,37 +2,51 @@
 
 var x;
 var y;
-var number1 = [];
-var number2 = [];
-
+var player1Num = [];
+var player2Num = [];
 //business logic
 function Game(player1, player2) {
   player1 = 0;
   player2 = 0;
   this.player1Total = player1;
   this.player2Total = player2;
-  // this.player1Num = [];
-  // this.player2Num = [];
+
 }
 
 Game.prototype.rollDie1 = function() {
   x = Math.floor((Math.random() *6) + 1);
   if (x === 1) {
-    this.player1Total === 0;
+    player1Num.pop();
+    this.player1Total = player1Num.reduce(add, 0);
+      function add(a, b) {
+      return a + b;
+      }
   } else {
-    this.player1Total += x;
+    player1Num.push(x);
+    this.player1Total = player1Num.reduce(add, 0);
+      function add(a, b) {
+      return a + b;
+      }
   }
-  console.log(x);
+  console.log(player1Num);
 }
 
 Game.prototype.rollDie2 = function() {
   y = Math.floor((Math.random() *6) + 1);
   if (y === 1) {
-    this.player2Total === 0;
+    player2Num.pop();
+    this.player2Total = player2Num.reduce(add, 0);
+      function add(a, b) {
+      return a + b;
+      }
   } else {
-    this.player2Total += y;
+    player2Num.push(y);
+    this.player2Total = player2Num.reduce(add, 0);
+      function add(a, b) {
+      return a + b;
+      }
   }
-  console.log(y);
+  console.log(player2Num);
 }
 
 Game.prototype.win = function() {
@@ -43,13 +57,13 @@ Game.prototype.win = function() {
 
 //user interface
 $(document).ready(function() {
-  var gameResult = new Game(x, y, number1, number2);
+  var gameResult = new Game(x, y);
   $("#game1").submit(function(event) {
     event.preventDefault();
 
     gameResult.rollDie1();
     gameResult.win();
-    $("#result1").text("Player 1 results: " +""+ gameResult.player1Total+ ", " + "Current Roll: " + x);
+    $("#result1").text("Player 1 results: " +""+ gameResult.player1Total + ", " + "Current Roll: " + x);
   });
 
   $("#game2").submit(function(event){
