@@ -50,7 +50,7 @@ Game.prototype.rollDie2 = function() {
 }
 
 Game.prototype.win = function() {
-  if (this.player1Total >= 100 || this.player2Total >= 100) {
+  if (this.player1Total >= 10 || this.player2Total >= 10) {
     alert ("you are a winner!");
   }
 }
@@ -63,7 +63,12 @@ $(document).ready(function() {
 
     gameResult.rollDie1();
     gameResult.win();
-    $("#result1").text("Player 1 results: " +""+ gameResult.player1Total + ", " + "Current Roll: " + x);
+    $("#resultA").text("Current Roll: " + x);
+
+  });
+  $("#hold1").submit(function(event){
+    event.preventDefault();
+    $("#result1").text("Player 1 current results: " +""+gameResult.player1Total);
   });
 
   $("#game2").submit(function(event){
@@ -71,6 +76,11 @@ $(document).ready(function() {
 
     gameResult.rollDie2();
     gameResult.win();
-    $("#result2").text("Player 2 results: " +""+gameResult.player2Total + ", " + "Current Roll: " + y);
+    $("#resultB").text("Current Roll: " + y);
+  });
+
+  $("#hold2").submit(function(event){
+    event.preventDefault();
+    $("#result2").text("Player 2 current results " + "" + gameResult.player2Total);
   });
 });
