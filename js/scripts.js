@@ -1,6 +1,6 @@
 
 
-var x;
+var player1dice;
 var y;
 var player1Num = [];
 var player2Num = [];
@@ -14,19 +14,14 @@ function Game(player1, player2) {
 }
 
 Game.prototype.rollDie1 = function() {
-  x = Math.floor((Math.random() *6) + 1);
-  if (x === 1) {
-    player1Num.pop();
-    this.player1Total = player1Num.reduce(add, 0);
-      function add(a, b) {
-      return a + b;
-      }
+  player1dice = Math.floor((Math.random() *6) + 1);
+  if (player1dice !== 1) {
+    player1Num.push(player1dice);
+    this.player1Total += player1dice
+
   } else {
-    player1Num.push(x);
-    this.player1Total = player1Num.reduce(add, 0);
-      function add(a, b) {
-      return a + b;
-      }
+    this.player1Total = 0
+
   }
   console.log(player1Num);
 }
@@ -50,20 +45,20 @@ Game.prototype.rollDie2 = function() {
 }
 
 Game.prototype.win = function() {
-  if (this.player1Total >= 10 || this.player2Total >= 10) {
+  if (this.player1Total >= 100 || this.player2Total >= 100) {
     alert ("you are a winner!");
   }
 }
 
 //user interface
 $(document).ready(function() {
-  var gameResult = new Game(x, y);
+  var gameResult = new Game(player1dice, y);
   $("#game1").submit(function(event) {
     event.preventDefault();
 
     gameResult.rollDie1();
     gameResult.win();
-    $("#resultA").text("Current Roll: " + x);
+    $("#resultA").text("Current Roll: " + player1dice);
 
   });
   $("#hold1").submit(function(event){
