@@ -5,44 +5,52 @@ var y;
 var player1Num = [];
 var player2Num = [];
 //business logic
-function Game(player1, player2) {
-  player1 = 0;
+function Game(player1score, player2,turnscore ) {
+  player1score = 0;
   player2 = 0;
-  this.player1Total = player1;
+  this.player1Total = player1score;
   this.player2Total = player2;
+  this.turnscore = turnscore
 
 }
 
 Game.prototype.rollDie1 = function() {
   player1dice = Math.floor((Math.random() *6) + 1);
   if (player1dice !== 1) {
-    player1Num.push(player1dice);
-    this.player1Total += player1dice
+    this.turnscore += player1dice;
 
   } else {
-    this.player1Total = 0
+    this.turnscore = 0;
 
   }
+  player1Num.push(player1dice);
   console.log(player1Num);
 }
 
-Game.prototype.rollDie2 = function() {
-  y = Math.floor((Math.random() *6) + 1);
-  if (y === 1) {
-    player2Num.pop();
-    this.player2Total = player2Num.reduce(add, 0);
-      function add(a, b) {
-      return a + b;
-      }
-  } else {
-    player2Num.push(y);
-    this.player2Total = player2Num.reduce(add, 0);
-      function add(a, b) {
-      return a + b;
-      }
-  }
-  console.log(player2Num);
-}
+function stop () {
+  var test = this.turnscore
+  this.player1Total += this.turnscore
+  console.log(test)
+
+};
+
+// Game.prototype.rollDie2 = function() {
+//   y = Math.floor((Math.random() *6) + 1);
+//   if (y === 1) {
+//     player2Num.pop();
+//     this.player2Total = player2Num.reduce(add, 0);
+//       function add(a, b) {
+//       return a + b;
+//       }
+//   } else {
+//     player2Num.push(y);
+//     this.player2Total = player2Num.reduce(add, 0);
+//       function add(a, b) {
+//       return a + b;
+//       }
+//   }
+//   console.log(player2Num);
+// }
 
 Game.prototype.win = function() {
   if (this.player1Total >= 100 || this.player2Total >= 100) {
